@@ -78,7 +78,7 @@ MyStruct{UInt8, String}(DateTime("2021-05-28T13:12:37.742"), ["The", "answer", "
 ## Usage
 
 ### Exporting to BSON
-*BSONify.jl* extends the Mongoc API to handle arbitrary types when creating BSON documents.
+*BSONify.jl* extends the *Mongoc.jl* API to handle arbitrary types when creating BSON documents.
 
 To convert some data to a BSON document pass it to the `Mongoc.BSON()` function:
 ```julia
