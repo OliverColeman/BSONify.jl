@@ -26,7 +26,7 @@ struct MyStruct{T, S}
     myParametric::T
     myDict::Dict{T, S}
     myNamedTuple::NamedTuple{(:a, :b), Tuple{Int16, Float32}}
-    myChild::Union{MyStruct{T, S}, Nothing}
+    myChild::Union{MyStruct{T, S}, S, Nothing} # Support for recursive structures and type unions.
 end
 
 # Define a custom type from the custom struct.
@@ -45,7 +45,7 @@ myData = MyType(
         0,
         Dict(),
         (a=1, b=2),
-        nothing
+        "sweet child o' mine"
     )
 )
 
@@ -65,13 +65,13 @@ println("\nmyReconstitutedData:\n", myReconstitutedData)
 ### Result:
 ```
 myData:
-MyStruct{UInt8, String}(DateTime("2021-05-24T11:51:44.322"), ["The", "answer", "is"], 0x2a, Dict{UInt8, String}(0x04 => "is", 0x02 => "answer?!"), (a = 1, b = 2.3f0), MyStruct{UInt8, String}(DateTime("2021-05-24T11:51:44.322"), ["It's", "not", "a", "question,", "but", "an", "answer", "learned", "in", "time"], 0x00, Dict{UInt8, String}(), (a = 1, b = 2.0f0), nothing))
+MyStruct{UInt8, String}(DateTime("2021-05-28T13:12:37.742"), ["The", "answer", "is"], 0x2a, Dict{UInt8, String}(0x04 => "is", 0x02 => "answer?!"), (a = 1, b = 2.3f0), MyStruct{UInt8, String}(DateTime("2021-05-28T13:12:37.753"), ["It's", "not", "a", "question,", "but", "an", "answer", "learned", "in", "time"], 0x00, Dict{UInt8, String}(), (a = 1, b = 2.0f0), "sweet child o' mine"))
 
 bson:
-BSON("{ "myDateTime" : { "$date" : "2021-05-24T11:51:44.322Z" }, "myArray" : [ "The", "answer", "is" ], "myParametric" : 42, "myDict" : { "4" : "is", "2" : "answer?!" }, "myNamedTuple" : { "a" : 1, "b" : 2.2999999523162841797 }, "myChild" : { "myDateTime" : { "$date" : "2021-05-24T11:51:44.322Z" }, "myArray" : [ "It's", "not", "a", "question,", "but", "an", "answer", "learned", "in", "time" ], "myParametric" : 0, "myDict" : {  }, "myNamedTuple" : { "a" : 1, "b" : 2.0 }, "myChild" : null } }")
+BSON("{ "myDateTime" : { "$date" : "2021-05-28T13:12:37.742Z" }, "myArray" : [ "The", "answer", "is" ], "myParametric" : 42, "myDict" : { "4" : "is", "2" : "answer?!" }, "myNamedTuple" : { "a" : 1, "b" : 2.2999999523162841797 }, "myChild" : { "myDateTime" : { "$date" : "2021-05-28T13:12:37.753Z" }, "myArray" : [ "It's", "not", "a", "question,", "but", "an", "answer", "learned", "in", "time" ], "myParametric" : 0, "myDict" : {  }, "myNamedTuple" : { "a" : 1, "b" : 2.0 }, "myChild" : "sweet child o' mine" } }")
 
 myReconstitutedData:
-MyStruct{UInt8, String}(DateTime("2021-05-24T11:51:44.322"), ["The", "answer", "is"], 0x2a, Dict{UInt8, String}(0x04 => "is", 0x02 => "answer?!"), (a = 1, b = 2.3f0), MyStruct{UInt8, String}(DateTime("2021-05-24T11:51:44.322"), ["It's", "not", "a", "question,", "but", "an", "answer", "learned", "in", "time"], 0x00, Dict{UInt8, String}(), (a = 1, b = 2.0f0), nothing))
+MyStruct{UInt8, String}(DateTime("2021-05-28T13:12:37.742"), ["The", "answer", "is"], 0x2a, Dict{UInt8, String}(0x04 => "is", 0x02 => "answer?!"), (a = 1, b = 2.3f0), MyStruct{UInt8, String}(DateTime("2021-05-28T13:12:37.753"), ["It's", "not", "a", "question,", "but", "an", "answer", "learned", "in", "time"], 0x00, Dict{UInt8, String}(), (a = 1, b = 2.0f0), "sweet child o' mine"))
 ```
 
 
