@@ -1,5 +1,9 @@
 # BSONify.jl
 
+| Status | Coverage |
+| :----: | :----: |
+| [![Build Status](https://travis-ci.com/OliverColeman/BSONify.jl.svg?branch=master)](https://travis-ci.com/OliverColeman/BSONify.jl) | [![codecov.io](http://codecov.io/github/OliverColeman/BSONify.jl/coverage.svg?branch=master)](http://codecov.io/github/OliverColeman/BSONify.jl?branch=master) |
+
 *BSONify.jl* is a Julia package for painlessly converting Julia data structures to and from [BSON](http://bsonspec.org/) (Binary JSON). BSON is a JSON-like data storage format that is designed to be efficient and fast and also store binary data. It is supported by many languages and is native to the MongoDB database system.
 
 *BSONify.jl* stores only the data in the BSON document, in a minimal and clear way. No metadata is stored, making it efficient and convenient for communication with other systems.
@@ -114,8 +118,8 @@ which is licensed under [Apache-2.0](https://github.com/mongodb/mongo-c-driver/b
 ## Alternative and related libraries
 
 * [Mongoc.jl](https://github.com/felipenoris/Mongoc.jl) -
-allows converting simple data structures such as Dicts and Arrays to and from BSON.
+allows converting simple data structures such as Dicts and Arrays to and from BSON. *BSONify.jl* is partly built on top of *Mongoc.jl*.
 
-* [BSON.jl](https://github.com/JuliaIO/BSON.jl) - allows converting complex data structures to and from BSON. Stores type metadata in the BSON, producing larger and (IMHO ;)) harder to interpret BSON documents. Requires specifying the module namespace under which to restore complex/custom types (rather than the type itself like BSONify.jl).
+* [BSON.jl](https://github.com/JuliaIO/BSON.jl) - allows converting complex data structures to and from BSON. Stores type metadata in the BSON, producing larger and (IMHO ;)) harder to interpret BSON documents. Requires specifying the module namespace under which to restore complex/custom types (rather than the type itself like *BSONify.jl*).
 
 * [JSON3.jl](https://github.com/quinnj/JSON3.jl) - similar API but for JSON rather than BSON.
