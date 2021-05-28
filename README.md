@@ -85,7 +85,7 @@ To convert some data to a BSON document pass it to the `Mongoc.BSON()` function:
 myBSON = Mongoc.BSON(myData)
 ```
 
-**Note:** the root of a BSON document is always a dictionary-like structure: **the value passed to `Mongoc.BSON()` must be a key-value mapping**. Acceptable key-value mappings are things like `Dict`s, composite type (`struct`) instances, and anything that extends `AbstractDict`. The values can be whatever you like (primitive types, arbitrary composite types, nested or recursive data structures...) If you need to save data that is not at root a key-value mapping, then you can do something like this to create a BSON document with a single key, `"myArray"` in this case, that is mapped to the data you want to store:
+**Note:** the root of a BSON document is always a dictionary-like structure: **the value passed to `Mongoc.BSON()` must be a key-value mapping**. Acceptable key-value mappings are things like `Dict`s, composite type (`struct`) instances, and anything that extends `AbstractDict`. More specifically, it can be any mapping for which the keys or fields are accessible via the `keys()` or `fieldnames()` functions. If you need to save data that is not at root a key-value mapping, then you can do something like this to create a BSON document with a single key, `"myArray"` in this case, that is mapped to the data you want to store:
 ```julia
 # Store an array in a BSON document.
 myArray = [1, 2, 3]
@@ -104,16 +104,12 @@ myArray = as_type(Array{Int64}, myBSON["myArray"])
 Note here that we stored the array under the `"myArray"` key, so we retrieve the array using that key on the BSON document before passing it to `as_type`.
 
 ### Storing BSON documents as files or in a MongoDB
-To read and write data (BSON) from and to files or a MongoDB, see this [documentation for `Mongoc.jl`](https://felipenoris.github.io/Mongoc.jl/stable/tutorial/#Read/Write-BSON-documents-from/to-IO-Stream-1)
+To read and write data (BSON) from and to files or a MongoDB, see this [documentation for *Mongoc.jl*](https://felipenoris.github.io/Mongoc.jl/stable/tutorial/#Read/Write-BSON-documents-from/to-IO-Stream-1).
 
 
 ## License
 
 The source code for the package `Mongoc.jl` is licensed under the [MIT License](https://github.com/felipenoris/Mongoc.jl/blob/master/LICENSE).
-
-This repository distributes binary assets built from [mongo-c-driver](https://github.com/mongodb/mongo-c-driver) source code,
-which is licensed under [Apache-2.0](https://github.com/mongodb/mongo-c-driver/blob/master/COPYING).
-
 
 ## Alternative and related libraries
 
