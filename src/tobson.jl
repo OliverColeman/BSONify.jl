@@ -4,6 +4,11 @@ using NamedTupleTools
 using DataStructures
 
 
+struct TypeIsNotAMapping <: Exception
+    msg::AbstractString
+end
+
+
 """
 Create a BSON document from an arbitrary value.
 Recursively converts the internal structure of arrays, tuples, structs, etc.
@@ -11,7 +16,7 @@ Recursively converts the internal structure of arrays, tuples, structs, etc.
 function Mongoc.BSON(value::Any)
     fnames = fieldnames(typeof(value))
     if isempty(fnames)
-        error("cannot create BSON from DataType $(typeof(value)) with no fields")
+        throw(TypeIsNotAMapping("cannot create BSON from DataType $(typeof(value)), data must be a mapping with keys or fields accessible via the keys() or fieldnames() functions"))
     end
 
     doc = Mongoc.BSON()
