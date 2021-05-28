@@ -1,8 +1,8 @@
 # BSONify.jl
 
-| Status | Coverage |
-| :----: | :----: |
-| [![Build Status](https://travis-ci.com/OliverColeman/BSONify.jl.svg?branch=master)](https://travis-ci.com/OliverColeman/BSONify.jl) | [![codecov.io](http://codecov.io/github/OliverColeman/BSONify.jl/coverage.svg?branch=master)](http://codecov.io/github/OliverColeman/BSONify.jl?branch=master) |
+[![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
+[![Build Status](https://travis-ci.com/OliverColeman/BSONify.jl.svg?branch=master)](https://travis-ci.com/OliverColeman/BSONify.jl)
+[![codecov.io](http://codecov.io/github/OliverColeman/BSONify.jl/coverage.svg?branch=master)](http://codecov.io/github/OliverColeman/BSONify.jl?branch=master)
 
 *BSONify.jl* is a Julia package for painlessly converting Julia data structures to and from [BSON](http://bsonspec.org/) (Binary JSON). BSON is a JSON-like data storage format that is designed to be efficient and fast and also store binary data. It is supported by many languages and is native to the MongoDB database system.
 
