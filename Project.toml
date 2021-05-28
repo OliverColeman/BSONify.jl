@@ -11,3 +11,12 @@ NamedTupleTools = "d9ec5142-1e00-5aa0-9d6a-321866360f50"
 Parameters = "d96e819e-fc66-5662-9728-84c9c7592b0a"
 SafeTestsets = "1bc83da4-3b8d-516f-aca4-4fe02f6d838f"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+
+[compat]
+julia = "1.6"
+DataStructures = "0.18"
+Mongoc = "0.6"
+NamedTupleTools = "0.13"
+Parameters = "0.12"
+SafeTestsets = "0.0.1"
