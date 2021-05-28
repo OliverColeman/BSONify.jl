@@ -1,7 +1,7 @@
 name = "BSONify"
 uuid = "aa8e78f4-663f-4ce1-b829-204476f23beb"
 authors = ["Oliver J. Coleman <oliver.coleman@gmail.com>"]
-version = "0.1.0"
+version = "1.0.0"
 
 [deps]
 DataStructures = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
