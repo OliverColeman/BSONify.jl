@@ -2,7 +2,7 @@ using BSONify, Test, Dates, NamedTupleTools
 import Mongoc
 
 
-function testReconstitutePrimitive(T, value; expectFailOnReconstitute = false)
+function testReconstitutePrimitive(T, value)
     original = Dict("v" => value)
     # println("original: ", original)
     # println()
@@ -10,14 +10,10 @@ function testReconstitutePrimitive(T, value; expectFailOnReconstitute = false)
     # println("bson: ", bson)
     # println()
 
-    if expectFailOnReconstitute
-        @test_throws ErrorException as_type(Dict{String, T}, bson)
-    else
-        reconstituted = as_type(Dict{String, T}, bson)
-        # println("reconstituted: ", reconstituted)
-        # println()
-        @test original["v"] == reconstituted["v"]
-    end
+    reconstituted = as_type(Dict{String, T}, bson)
+    # println("reconstituted: ", reconstituted)
+    # println()
+    @test original["v"] == reconstituted["v"]
 end
 
 
@@ -40,12 +36,21 @@ testReconstitutePrimitive(Bool, true)
 testReconstitutePrimitive(Bool, false)
 
 for T in numberTypes
-    testReconstitutePrimitive(T, 42)
+    testReconstitutePrimitive(T, convert(T, 42))
 end
 testReconstitutePrimitive(String, "42")
 testReconstitutePrimitive(DateTime, now())
 testReconstitutePrimitive(DataType, Int16)
 
+# Auto convert string to number (really only used when converting numeric map keys to strings to be bson compatible)
+as_type(Int32, "123") == 123
+as_type(Float64, "12.3") == 12.3
+
+
+######## Numbers as dict keys
+
+testReconstitutePrimitive(Dict{Int32, Int32}, Dict(12 => 34, 56 => 78))
+testReconstitutePrimitive(Dict{Float32, Int32}, Dict(1.2f0 => 34, 5.6f0 => 78))
 
 ######## Arrays of primitives
 
@@ -176,3 +181,5 @@ testReconstituteStruct(
 @test_throws FieldsMismatch as_type(SimpleStruct, Dict("primitive1" => 12))
 @test_throws FieldsMismatch as_type(SimpleStruct, Dict("primitive1" => 12, "primitive3" => "12"))
 @test_throws FieldsMismatch as_type(SimpleStruct, Dict("primitive1" => 12, "primitive2" => "12", "primitive3" => "12"))
+
+@test_throws TypeIsNotAMapping Mongoc.BSON(123)
