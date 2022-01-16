@@ -109,7 +109,7 @@ To read and write data (BSON) from and to files or a MongoDB, see this [document
 
 ## License
 
-The source code for the package `Mongoc.jl` is licensed under the [MIT License](https://github.com/felipenoris/Mongoc.jl/blob/master/LICENSE).
+The source code for the package `BSONify.jl` is licensed under the [MIT License](https://github.com/OliverColeman/BSONify.jl/blob/master/LICENSE).
 
 ## Alternative and related libraries
 
